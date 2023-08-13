@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-**Analysing basic metrics**
+# Analysing basic metrics
 
 data = pd.read_csv('netflix_data.csv')
 data.shape
@@ -17,7 +17,7 @@ data.describe()
 
 data.columns
 
-**Data Cleaning**
+# Data Cleaning
 
 data.isnull().sum()
 
@@ -53,7 +53,7 @@ data.isna().sum()
 
 data.head()
 
-**EDA**
+# EDA
 
 data['type'].value_counts()
 
@@ -125,7 +125,7 @@ data['duration']
 
 data['duration_min'] = data[data['type'] == 'Movie']['duration'].str.extract('(\d+)').astype(float)
 data['duration_seasons'] = data[data['type'] == 'TV Show']['duration'].str.extract('(\d+)').astype(float)
-# fill NaN values in the new columns with 0
+**fill NaN values in the new columns with 0**
 data[['duration_min', 'duration_seasons']] = data[['duration_min', 'duration_seasons']].fillna(0)
 data = data.drop('duration', axis = 1)
 
@@ -138,7 +138,7 @@ sns.countplot(data = data[data['type'] == 'TV Show'], x = 'duration_seasons',col
 
 genre_counts = data['listed_in'].str.split(', ').explode().value_counts()
 
-# Plot the count of genres using a bar plot
+**Plot the count of genres using a bar plot**
 plt.figure(figsize=(10, 6))
 sns.barplot(x=genre_counts.index, y=genre_counts.values)
 plt.xlabel('Genre')
